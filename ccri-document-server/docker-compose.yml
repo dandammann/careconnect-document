@@ -1,52 +1,25 @@
 version: '2'
 services:
-
-
   ccrimongo:
-      container_name: ccrimongo
-      image: mongo:3.6.3
-      ports:
-        - 27107:27107
-      networks:
-        - ccri_net
+    container_name: ccrimongo
+    image: mongo:3.6.3
+    ports:
+    - 27107:27107
 
   ccridocument:
-      container_name: ccridocument
-      image: thorlogic/ccri-document:latest
-      depends_on:
-        - ccrimongo
-      links:
-        - ccrimongo
-      environment:
-        - fhir.resource.serverBase=http://127.0.0.1:8080/careconnect-gateway/STU3
-        - fhir.resource.serverName=Care Connect RI FHIR Server
-        - fhir.resource.serverVersion=3.5.1-SNAPSHOT
-        - spring.data.mongodb.uri=mongodb://ccrimongo:27017/careconnect-nosql
-        - spring.data.mongodb.database=careconnect-nosql
-      ports:
-        - 8181:8181
-      extra_hosts:
-        # Define an alias to loop back for REST Connections
-        - "${FHIR_SERVER_BASE_HOST}:127.0.0.1"
-      volumes:
-        - mongo-log-volume:/usr/local/tomcat/logs
-      networks:
-        ccri_net:
-          ipv4_address: 172.168.240.11
+    container_name: ccridocument
+    image: thorlogic/ccri-document:latest
+    depends_on:
+    - ccrimongo
+    links:
+    - ccrimongo
+    environment:
+    - fhir.resource.serverBase=http://167.99.202.134
+    - fhir.resource.serverName=Appointment Booking RI FHIR Server
+    - fhir.resource.serverVersion=3.5.1-SNAPSHOT
+    - spring.data.mongodb.uri=mongodb://ccrimongo:27017/careconnect-nosql
+    - spring.data.mongodb.database=careconnect-nosql
+    ports:
+    - 8181:8181
 
-
-
-
-
-volumes:
-
-  mongo-log-volume:
-
-networks:
-  ccri_net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.168.240.0/24
 
