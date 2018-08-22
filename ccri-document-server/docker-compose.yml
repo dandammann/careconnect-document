@@ -15,7 +15,7 @@ services:
     - ccrimongo
     environment:
     - fhir.resource.serverBase=http://167.99.202.134
-    - fhir.resource.serverName=Appointment Booking RI FHIR Server
+    - fhir.resource.serverName=Appointment Booking POC FHIR Server
     - fhir.resource.serverVersion=3.5.1-SNAPSHOT
     - spring.data.mongodb.uri=mongodb://ccrimongo:27017/careconnect-nosql
     - spring.data.mongodb.database=careconnect-nosql
