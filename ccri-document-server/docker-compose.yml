@@ -23,4 +23,4 @@ services:
     - 8181:8181
     extra_hosts:
     # Define an alias to loop back for REST Connections
-    - "${FHIR_SERVER_BASE_HOST}:127.0.0.1"
+    - "$${FHIR_SERVER_BASE_HOST}:127.0.0.1"
