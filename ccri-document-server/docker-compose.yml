@@ -14,12 +14,13 @@ services:
     links:
     - ccrimongo
     environment:
-    - fhir.resource.serverBase=http://167.99.202.134:8181/STU3
+    - fhir.resource.serverBase=http://127.0.0.1:8181/a2si-appointment-poc/STU3
     - fhir.resource.serverName=Appointment Booking POC FHIR Server
     - fhir.resource.serverVersion=3.5.1-SNAPSHOT
     - spring.data.mongodb.uri=mongodb://ccrimongo:27017/careconnect-nosql
     - spring.data.mongodb.database=careconnect-nosql
     ports:
     - 8181:8181
-
-
+    extra_hosts:
+    # Define an alias to loop back for REST Connections
+    - "${FHIR_SERVER_BASE_HOST}:127.0.0.1"
